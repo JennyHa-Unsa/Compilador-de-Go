@@ -1,4 +1,5 @@
-from reserved import reserved
+from .reserved import reserved
+
 
 tokens = [
     'ID',

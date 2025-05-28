@@ -1,53 +1,8 @@
 import ply.lex as lex
 
-# Lista de palabras reservadas
-reserved = {
-    'if': 'IF',
-    'else': 'ELSE',
-    'for': 'FOR',
-    'func': 'FUNC',
-    'return': 'RETURN',
-    'var': 'VAR',
-    'int': 'INT',
-    'bool': 'BOOL',
-    'true': 'TRUE',
-    'false': 'FALSE'
-}
-
-# Lista de tokens (palabras reservadas + otros)
-tokens = [
-    'ID',           # identificadores
-    'NUMBER',       # números enteros
-    'PLUS', 'MINUS', 'TIMES', 'DIVIDE',  # operadores aritméticos
-    'AND', 'OR', 'NOT',                  # operadores lógicos
-    'ASSIGN', 'EQ', 'NEQ',               # asignación y comparación
-    'LT', 'GT', 'LE', 'GE',              # comparadores
-    'LPAREN', 'RPAREN',                   # paréntesis
-    'LBRACE', 'RBRACE',                   # llaves
-    'SEMI', 'COMMA'                      # punto y coma, coma
-] + list(reserved.values())
-
-# Reglas de expresiones regulares para tokens simples
-t_PLUS    = r'\+'
-t_MINUS   = r'-'
-t_TIMES   = r'\*'
-t_DIVIDE  = r'/'
-t_AND     = r'&&'
-t_OR      = r'\|\|'
-t_NOT     = r'!'
-t_ASSIGN  = r'='
-t_EQ      = r'=='
-t_NEQ     = r'!='
-t_LT      = r'<'
-t_GT      = r'>'
-t_LE      = r'<='
-t_GE      = r'>='
-t_LPAREN  = r'\('
-t_RPAREN  = r'\)'
-t_LBRACE  = r'\{'
-t_RBRACE  = r'\}'
-t_SEMI    = r';'
-t_COMMA   = r','
+from analizador_lexico.reserved import reserved
+from analizador_lexico.tokens_list import tokens
+from analizador_lexico.token_regex import *
 
 # Ignorar espacios y tabs
 t_ignore = ' \t'
@@ -77,17 +32,3 @@ def t_error(t):
 
 # Construcción del lexer
 lexer = lex.lex()
-
-# Prueba rápida
-if __name__ == "__main__":
-    data = '''
-    var x int = 10;
-    if x > 5 {
-        x = x + 1;
-    } else {
-        x = 0;
-    }
-    '''
-    lexer.input(data)
-    for tok in lexer:
-        print(tok)
