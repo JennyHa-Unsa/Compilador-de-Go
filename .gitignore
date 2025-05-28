@@ -1,5 +1,6 @@
 # Personal Python project .gitignore template
 myenv/
+parser.out
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
