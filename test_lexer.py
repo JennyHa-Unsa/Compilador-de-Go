@@ -1,17 +1,28 @@
-import lexer  # Asumiendo que el lexer está en lexer.py
 import os
+from lexer import lexer  # Asumiendo que el lexer está en lexer.py
 
-def probar_lexer(codigo, nombre_archivo):
-    print(f"\n--- Probando archivo: {nombre_archivo} ---\n")
-    print(f"TOKEN \t VALOR \t\t LÍNEA \t POSICIÓN \t")
-    lexer.lexer.input(codigo)
+def guardar_tokens(codigo, nombre_archivo):
+    # Crear la carpeta 'tabs_tokens' si no existe
+    if not os.path.exists('tabs_tokens'):
+        os.makedirs('tabs_tokens')
+
+    # Generar los tokens
+    lexer.input(codigo)
+    tokens_generados = []
     while True:
-        tok = lexer.lexer.token()
+        tok = lexer.token()
         if not tok:
             break
-        print(f"{tok.type} \t {tok.value} \t\t {tok.lineno} \t {tok.lexpos} \t")
+        tokens_generados.append(f"Token: {tok.type}, Valor: {tok.value}, Línea: {tok.lineno}, Posición: {tok.lexpos}")
+        # tokens_generados.append(f"Token: {tok.type}, Valor: {tok.value}")
 
-def cargar_y_probar_tests(ruta_carpeta='tests'):
+    # Guardar los tokens en un archivo
+    ruta_archivo = os.path.join('tabs_tokens', f"{nombre_archivo}_tokens.txt")
+    with open(ruta_archivo, 'w', encoding='utf-8') as f:
+        for token in tokens_generados:
+            f.write(token + '\n')
+
+def cargar_y_guardar_tests(ruta_carpeta='tests'):
     if not os.path.exists(ruta_carpeta):
         print(f"La carpeta '{ruta_carpeta}' no existe.")
         return
@@ -26,7 +37,8 @@ def cargar_y_probar_tests(ruta_carpeta='tests'):
         ruta_archivo = os.path.join(ruta_carpeta, archivo)
         with open(ruta_archivo, 'r', encoding='utf-8') as f:
             codigo = f.read()
-            probar_lexer(codigo, archivo)
+            print(f"Generando tokens para archivo: {archivo}")
+            guardar_tokens(codigo, archivo)
 
 if __name__ == "__main__":
-    cargar_y_probar_tests()
+    cargar_y_guardar_tests()

@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftPLUSMINUSleftTIMESDIVIDEAND ASSIGN BOOL COMMA DIVIDE ELSE EQ FALSE FOR FUNC GE GT ID IF INT LBRACE LE LPAREN LT MINUS NEQ NOT NUMBER OR PLUS RBRACE RETURN RPAREN SEMI TIMES TRUE VARexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expressionexpression : NUMBER'
+_lr_signature = 'leftORleftANDleftEQNEQleftLTLEGTGEleftPLUSMINUSleftTIMESDIVIDErightNOTAND ASSIGN BOOL COMMA DIVIDE ELSE EQ FALSE FOR FUNC GE GT ID IF INT LBRACE LE LPAREN LT MINUS NEQ NOT NUMBER OR PLUS RBRACE RETURN RPAREN SEMI TIMES TRUE VARprogram : statement_liststatement_list : statement_list statement\n                      | statementstatement : VAR ID INT SEMI\n                 | VAR ID INT ASSIGN expression SEMIstatement : ID ASSIGN expression SEMIexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expression\n                  | expression AND expression\n                  | expression OR expression\n                  | expression EQ expression\n                  | expression NEQ expression\n                  | expression LT expression\n                  | expression LE expression\n                  | expression GT expression\n                  | expression GE expressionexpression : NOT expressionexpression : LPAREN expression RPARENexpression : NUMBERexpression : IDstatement : IF expression LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE\n                 | IF expression LBRACE statement_list RBRACEstatement : FOR ID ASSIGN expression SEMI expression SEMI ID ASSIGN expression LBRACE statement_list RBRACEstatement : FUNC ID LPAREN RPAREN LBRACE statement_list RBRACEstatement : RETURN expression SEMI'
     
-_lr_action_items = {'NUMBER':([0,3,4,5,6,],[2,2,2,2,2,]),'$end':([1,2,7,8,9,10,],[0,-5,-1,-2,-3,-4,]),'PLUS':([1,2,7,8,9,10,],[3,-5,-1,-2,-3,-4,]),'MINUS':([1,2,7,8,9,10,],[4,-5,-1,-2,-3,-4,]),'TIMES':([1,2,7,8,9,10,],[5,-5,5,5,-3,-4,]),'DIVIDE':([1,2,7,8,9,10,],[6,-5,6,6,-3,-4,]),}
+_lr_action_items = {'VAR':([0,2,3,10,23,40,41,43,44,61,63,64,67,68,70,71,73,76,77,78,],[4,4,-3,-2,4,-27,-4,-6,4,-24,4,-5,4,4,-26,4,-23,4,4,-25,]),'ID':([0,2,3,4,6,7,8,9,10,12,14,15,23,24,25,26,27,28,29,30,31,32,33,34,35,38,40,41,42,43,44,61,62,63,64,67,68,69,70,71,73,74,76,77,78,],[5,5,-3,11,17,18,19,17,-2,17,17,17,5,17,17,17,17,17,17,17,17,17,17,17,17,17,-27,-4,17,-6,5,-24,17,5,-5,5,5,72,-26,5,-23,17,5,5,-25,]),'IF':([0,2,3,10,23,40,41,43,44,61,63,64,67,68,70,71,73,76,77,78,],[6,6,-3,-2,6,-27,-4,-6,6,-24,6,-5,6,6,-26,6,-23,6,6,-25,]),'FOR':([0,2,3,10,23,40,41,43,44,61,63,64,67,68,70,71,73,76,77,78,],[7,7,-3,-2,7,-27,-4,-6,7,-24,7,-5,7,7,-26,7,-23,7,7,-25,]),'FUNC':([0,2,3,10,23,40,41,43,44,61,63,64,67,68,70,71,73,76,77,78,],[8,8,-3,-2,8,-27,-4,-6,8,-24,8,-5,8,8,-26,8,-23,8,8,-25,]),'RETURN':([0,2,3,10,23,40,41,43,44,61,63,64,67,68,70,71,73,76,77,78,],[9,9,-3,-2,9,-27,-4,-6,9,-24,9,-5,9,9,-26,9,-23,9,9,-25,]),'$end':([1,2,3,10,40,41,43,61,64,70,73,78,],[0,-1,-3,-2,-27,-4,-6,-24,-5,-26,-23,-25,]),'RBRACE':([3,10,40,41,43,44,61,64,67,70,71,73,77,78,],[-3,-2,-27,-4,-6,61,-24,-5,70,-26,73,-23,78,-25,]),'ASSIGN':([5,18,21,72,],[12,38,42,74,]),'NOT':([6,9,12,14,15,24,25,26,27,28,29,30,31,32,33,34,35,38,42,62,74,],[14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,]),'LPAREN':([6,9,12,14,15,19,24,25,26,27,28,29,30,31,32,33,34,35,38,42,62,74,],[15,15,15,15,15,39,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,]),'NUMBER':([6,9,12,14,15,24,25,26,27,28,29,30,31,32,33,34,35,38,42,62,74,],[16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,]),'INT':([11,],[21,]),'LBRACE':([13,16,17,36,45,46,47,48,49,50,51,52,53,54,55,56,57,59,65,75,],[23,-21,-22,-19,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,-20,63,68,76,]),'PLUS':([13,16,17,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,75,],[24,-21,-22,24,24,-19,24,-7,-8,-9,-10,24,24,24,24,24,24,24,24,-20,24,24,24,24,]),'MINUS':([13,16,17,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,75,],[25,-21,-22,25,25,-19,25,-7,-8,-9,-10,25,25,25,25,25,25,25,25,-20,25,25,25,25,]),'TIMES':([13,16,17,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,75,],[26,-21,-22,26,26,-19,26,26,26,-9,-10,26,26,26,26,26,26,26,26,-20,26,26,26,26,]),'DIVIDE':([13,16,17,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,75,],[27,-21,-22,27,27,-19,27,27,27,-9,-10,27,27,27,27,27,27,27,27,-20,27,27,27,27,]),'AND':([13,16,17,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,75,],[28,-21,-22,28,28,-19,28,-7,-8,-9,-10,-11,28,-13,-14,-15,-16,-17,-18,-20,28,28,28,28,]),'OR':([13,16,17,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,75,],[29,-21,-22,29,29,-19,29,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,-20,29,29,29,29,]),'EQ':([13,16,17,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,75,],[30,-21,-22,30,30,-19,30,-7,-8,-9,-10,30,30,-13,-14,-15,-16,-17,-18,-20,30,30,30,30,]),'NEQ':([13,16,17,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,75,],[31,-21,-22,31,31,-19,31,-7,-8,-9,-10,31,31,-13,-14,-15,-16,-17,-18,-20,31,31,31,31,]),'LT':([13,16,17,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,75,],[32,-21,-22,32,32,-19,32,-7,-8,-9,-10,32,32,32,32,-15,-16,-17,-18,-20,32,32,32,32,]),'LE':([13,16,17,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,75,],[33,-21,-22,33,33,-19,33,-7,-8,-9,-10,33,33,33,33,-15,-16,-17,-18,-20,33,33,33,33,]),'GT':([13,16,17,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,75,],[34,-21,-22,34,34,-19,34,-7,-8,-9,-10,34,34,34,34,-15,-16,-17,-18,-20,34,34,34,34,]),'GE':([13,16,17,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,75,],[35,-21,-22,35,35,-19,35,-7,-8,-9,-10,35,35,35,35,-15,-16,-17,-18,-20,35,35,35,35,]),'SEMI':([16,17,20,21,22,36,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,66,],[-21,-22,40,41,43,-19,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,-20,62,64,69,]),'RPAREN':([16,17,36,37,39,45,46,47,48,49,50,51,52,53,54,55,56,57,],[-21,-22,-19,57,59,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,-20,]),'ELSE':([61,],[65,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,3,4,5,6,],[1,7,8,9,10,]),}
+_lr_goto_items = {'program':([0,],[1,]),'statement_list':([0,23,63,68,76,],[2,44,67,71,77,]),'statement':([0,2,23,44,63,67,68,71,76,77,],[3,10,3,10,3,10,3,10,3,10,]),'expression':([6,9,12,14,15,24,25,26,27,28,29,30,31,32,33,34,35,38,42,62,74,],[13,20,22,36,37,45,46,47,48,49,50,51,52,53,54,55,56,58,60,66,75,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,10 +26,32 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> expression","S'",1,None,None,None),
-  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','parser.py',11),
-  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','parser.py',12),
-  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','parser.py',13),
-  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','parser.py',14),
-  ('expression -> NUMBER','expression',1,'p_expression_number','parser.py',18),
+  ("S' -> program","S'",1,None,None,None),
+  ('program -> statement_list','program',1,'p_program','parser.py',19),
+  ('statement_list -> statement_list statement','statement_list',2,'p_statement_list','parser.py',23),
+  ('statement_list -> statement','statement_list',1,'p_statement_list','parser.py',24),
+  ('statement -> VAR ID INT SEMI','statement',4,'p_statement_var_decl','parser.py',32),
+  ('statement -> VAR ID INT ASSIGN expression SEMI','statement',6,'p_statement_var_decl','parser.py',33),
+  ('statement -> ID ASSIGN expression SEMI','statement',4,'p_statement_assign','parser.py',41),
+  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','parser.py',46),
+  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','parser.py',47),
+  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','parser.py',48),
+  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','parser.py',49),
+  ('expression -> expression AND expression','expression',3,'p_expression_binop','parser.py',50),
+  ('expression -> expression OR expression','expression',3,'p_expression_binop','parser.py',51),
+  ('expression -> expression EQ expression','expression',3,'p_expression_binop','parser.py',52),
+  ('expression -> expression NEQ expression','expression',3,'p_expression_binop','parser.py',53),
+  ('expression -> expression LT expression','expression',3,'p_expression_binop','parser.py',54),
+  ('expression -> expression LE expression','expression',3,'p_expression_binop','parser.py',55),
+  ('expression -> expression GT expression','expression',3,'p_expression_binop','parser.py',56),
+  ('expression -> expression GE expression','expression',3,'p_expression_binop','parser.py',57),
+  ('expression -> NOT expression','expression',2,'p_expression_not','parser.py',61),
+  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','parser.py',65),
+  ('expression -> NUMBER','expression',1,'p_expression_number','parser.py',69),
+  ('expression -> ID','expression',1,'p_expression_id','parser.py',73),
+  ('statement -> IF expression LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE','statement',9,'p_statement_if','parser.py',78),
+  ('statement -> IF expression LBRACE statement_list RBRACE','statement',5,'p_statement_if','parser.py',79),
+  ('statement -> FOR ID ASSIGN expression SEMI expression SEMI ID ASSIGN expression LBRACE statement_list RBRACE','statement',13,'p_statement_for','parser.py',87),
+  ('statement -> FUNC ID LPAREN RPAREN LBRACE statement_list RBRACE','statement',7,'p_statement_func','parser.py',92),
+  ('statement -> RETURN expression SEMI','statement',3,'p_statement_return','parser.py',96),
 ]

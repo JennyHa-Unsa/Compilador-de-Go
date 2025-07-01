@@ -1,5 +1,7 @@
 # Personal Python project .gitignore template
 myenv/
+asts/
+tabs_tokens/
 parser.out
 
 # Byte-compiled / optimized / DLL files
