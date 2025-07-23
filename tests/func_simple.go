@@ -1,5 +1,0 @@
-func main() {
-    var x int;
-    x = 10;
-    return x;
-}
